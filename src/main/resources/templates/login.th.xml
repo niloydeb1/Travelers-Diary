@@ -1,0 +1,10 @@
+<thlogic>
+    <attr sel="#login"
+          th:href="@{'login'}"/>
+    <attr sel="#signup"
+          th:href="@{'signup'}"/>
+    <attr sel="#form"
+          th:action="@{'home'}"/>
+    <attr sel="#message"
+          th:text="${param.LOGIN_ERROR}"/>
+</thlogic>

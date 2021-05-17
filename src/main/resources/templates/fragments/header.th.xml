@@ -1,0 +1,16 @@
+<thlogic>
+    <attr sel="#titleHome"
+          th:href="@{'home'}"/>
+    <attr sel="#home"
+          th:href="@{'home'}"/>
+<!--    <attr sel="#blog"-->
+<!--          th:href="@{'blog'}"/>-->
+    <attr sel="#blog"
+          th:href="@{blog(KEYWORD=${''}, CURRENT_PAGE=${1})}"/>
+    <attr sel="#create"
+          th:href="@{'create'}"/>
+    <attr sel="#search"
+          th:action="@{'blog'}"/>
+    <attr sel="#logout"
+          th:href="@{'logout'}"/>
+</thlogic>

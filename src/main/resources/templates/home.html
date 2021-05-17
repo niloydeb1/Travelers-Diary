@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head id="headId">
+    <meta charset="utf-8">
+    <title>Head Fragment</title>
+  </head>
+
+  <body>
+    <header id="headerId">
+      <!-- Main Navbar-->
+      <nav>
+          <p>This is navigation bar</p>
+      </nav>
+    </header>
+    <!-- Hero Section-->
+    <section style="background: url(myImg/into-1.jpg); background-size: cover; background-position: center center" class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7" style="color: #0c5460;">
+            <h1>Traveler's Diary - A blog <br> by travelers </h1>
+          </div>
+        </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down" style="color: #0c5460;"></i> <span><p style="color: #0c5460;">Scroll Down</p></span></a>
+      </div>
+    </section>
+
+    <!-- Intro Section-->
+    <section class="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <p class="text-big">"Man cannot <strong>discover</strong> new oceans unless he has the <strong>courage</strong> to lose sight of the shore."</p>
+            <span><h2 class="h3"> - Andre Gide</h2></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-posts no-padding-top">
+      <div class="container">
+
+        <!-- Post-->
+        <div class="row d-flex align-items-stretch" th:each="blog : ${BLOG_LIST}">
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category">
+                    <a th:href="@{blog(KEYWORD=${blog.getKeyword()}, CURRENT_PAGE=${1})}" th:text="${blog.getKeyword()}">
+                      Keyword
+                    </a>
+                  </div>
+                  <a th:href="@{post(BID=${blog.getBid()})}" href="post.html">
+                    <h2 class="h4" th:text="${blog.getTitle()}">Blog Title</h2>
+                  </a>
+                </header>
+                <p th:text="${blog.getShortContent(blog.getContent())}">Short Content</p>
+                <footer class="post-footer d-flex align-items-center">
+                  <div class="title" th:text="${blog.getUser().getName()}"><span>Blogger</span></div>
+                  <div class="date" th:text="${blog.getDate()}"><i class="icon-clock"></i> 2 months ago</div>
+                  <div class="comments"><i class="icon-comment"></i></div>
+                  <div class="comments" th:text="${blog.getComment().size()}">0</div>
+                </footer>
+              </div>
+            </div>
+          </div>
+          <div class="image col-lg-5">
+            <img th:src="@{${blog.getImgPath()}}" alt="..." style="width: 450px; height: 300px;">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Gallery Section-->
+    <section class="gallery no-padding">
+      <div class="row">
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="myImg/gallery-1.jpg" data-fancybox="gallery" class="image"><img src="myImg/gallery-1.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="myImg/gallery-2.jpg" data-fancybox="gallery" class="image"><img src="myImg/gallery-2.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="myImg/gallery-3.jpg" data-fancybox="gallery" class="image"><img src="myImg/gallery-3.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="myImg/gallery-4.jpg" data-fancybox="gallery" class="image"><img src="myImg/gallery-4.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+      </div>
+      </section>
+
+    <!-- Page Footer-->
+    <footer class="main-footer" id="footerId">
+      <p>&copy; Created by Niloy Deb Roy</p>
+    </footer>
+
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
+    <script src="js/front.js"></script>
+  </body>
+</html>

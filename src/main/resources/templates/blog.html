@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head id="headId">
+  <meta charset="utf-8">
+  <title>Head Fragment</title>
+</head>
+
+<body>
+<header id="headerId">
+  <!-- Main Navbar-->
+  <nav>
+    <p>This is navigation bar</p>
+  </nav>
+</header>
+<div class="container">
+  <div class="row">
+    <!-- Latest Posts -->
+    <main class="post blog-post col-lg-8">
+      <div class="container" style="width: 1300px;">
+        <div class="row">
+
+          <!-- post -->
+          <div th:if="${BLOGS.size() < 1}">
+            <div class="post-details" style="height: 500px;">
+              <p class="text-muted" style="font-size: 20px;">Sorry, no blog found!</p>
+            </div>
+          </div>
+
+          <div class="post col-xl-6" th:each="blog, iStat : ${BLOGS}">
+
+            <th:block th:if="${iStat.count < 5}">
+
+              <div class="post-thumbnail">
+                <a th:href="@{post(BID=${blog.getBid()})}" href="#">
+                  <img style="height: 400px;" th:src="${blog.getImgPath()}" alt="..." class="img-fluid">
+                </a>
+              </div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="date" th:text="${blog.getDate()}"><i class="icon-clock"></i>Date</div>
+                  <div class="category">
+                    <a th:href="@{blog(KEYWORD=${blog.getKeyword()}, CURRENT_PAGE=${1})}" th:text="${blog.getKeyword()}">
+                      Keyword
+                    </a>
+                  </div>
+                </div>
+
+                <a th:href="@{post(BID=${blog.getBid()})}" href="#">
+                  <h3 class="h4" th:text="${blog.getTitle()}">Blog Content</h3>
+                </a>
+
+                <p class="text-muted" th:text="${blog.getShortContent(blog.getContent())}">Blog Short Content</p>
+
+                <footer class="post-footer d-flex align-items-center">
+                  <div class="title"><span th:text="${blog.getUser().getName()}">Author</span></div>
+                  <div class="comments meta-last"><i class="icon-comment"></i></div>
+                  <div class="comments" th:text="${blog.getComment().size()}">0</div>
+                </footer>
+              </div>
+
+            </th:block>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <th:block th:if="${TOTAL_PAGES > 0}">
+          <nav aria-label="Page navigation example" style="padding-top: 20px;">
+            <ul class="pagination pagination-template d-flex justify-content-center">
+              <th:block th:if="${CURRENT_PAGE == 1}">
+                <li class="page-item"><a style="pointer-events: none" href="#" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+              </th:block>
+
+              <th:block th:if="${CURRENT_PAGE > 1}">
+                <li class="page-item">
+                  <a th:href="@{blog(KEYWORD=${KEYWORD}, CURRENT_PAGE=${CURRENT_PAGE - 1})}" class="page-link">
+                    <i class="fa fa-angle-left"></i>
+                  </a>
+                </li>
+              </th:block>
+
+              <th:block th:if="${TOTAL_PAGES < 6}">
+                <li th:each="i : ${#numbers.sequence(1, TOTAL_PAGES)}" class="page-item">
+                  <a th:href="@{blog(KEYWORD=${KEYWORD}, CURRENT_PAGE=${i})}"
+                     th:class="${CURRENT_PAGE != i} ? 'page-link' : 'page-link active'"
+                     th:text="${i}">
+                    1
+                  </a>
+                </li>
+              </th:block>
+
+              <th:block th:if="${TOTAL_PAGES > 5}">
+
+                <th:block th:if="${(CURRENT_PAGE - 2) < 1}">
+                  <th:block th:if="${(CURRENT_PAGE + 2) < TOTAL_PAGES}">
+                    <li th:each="i : ${#numbers.sequence(1, 5)}" class="page-item">
+                      <a th:href="@{blog(KEYWORD=${KEYWORD}, CURRENT_PAGE=${i})}"
+                         th:class="${CURRENT_PAGE != i} ? 'page-link' : 'page-link active'"
+                         th:text="${i}">
+                        1
+                      </a>
+                    </li>
+                  </th:block>
+
+                  <th:block th:if="${(CURRENT_PAGE + 2) >= TOTAL_PAGES}">
+                    <li th:each="i : ${#numbers.sequence((CURRENT_PAGE - 2), TOTAL_PAGES)}" class="page-item">
+                      <a th:href="@{blog(KEYWORD=${KEYWORD}, CURRENT_PAGE=${i})}"
+                         th:class="${CURRENT_PAGE != i} ? 'page-link' : 'page-link active'"
+                         th:text="${i}">
+                        1
+                      </a>
+                    </li>
+                  </th:block>
+                </th:block>
+
+                <th:block th:if="${(CURRENT_PAGE - 2) > 0}">
+                  <th:block th:if="${(CURRENT_PAGE + 2) < TOTAL_PAGES}">
+                    <li th:each="i : ${#numbers.sequence((CURRENT_PAGE - 2), (CURRENT_PAGE + 2))}" class="page-item">
+                      <a th:href="@{blog(KEYWORD=${KEYWORD}, CURRENT_PAGE=${i})}"
+                         th:class="${CURRENT_PAGE != i} ? 'page-link' : 'page-link active'"
+                         th:text="${i}">
+                        1
+                      </a>
+                    </li>
+                  </th:block>
+
+                  <th:block th:if="${(CURRENT_PAGE + 2) >= TOTAL_PAGES}">
+                    <li th:each="i : ${#numbers.sequence((TOTAL_PAGES - 4), TOTAL_PAGES)}" class="page-item">
+                      <a th:href="@{blog(KEYWORD=${KEYWORD}, CURRENT_PAGE=${i})}"
+                         th:class="${CURRENT_PAGE != i} ? 'page-link' : 'page-link active'"
+                         th:text="${i}">
+                        1
+                      </a>
+                    </li>
+                  </th:block>
+                </th:block>
+              </th:block>
+
+              <th:block th:if="${CURRENT_PAGE == TOTAL_PAGES}">
+                <li class="page-item"><a style="pointer-events: none" href="#" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+              </th:block>
+
+              <th:block th:if="${CURRENT_PAGE < TOTAL_PAGES}">
+                <li class="page-item">
+                  <a th:href="@{blog(KEYWORD=${KEYWORD}, CURRENT_PAGE=${CURRENT_PAGE + 1})}" class="page-link">
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </li>
+              </th:block>
+            </ul>
+          </nav>
+        </th:block>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Page Footer-->
+<footer class="main-footer" id="footerId">
+  <p>&copy; Created by Niloy Deb Roy</p>
+</footer>
+
+<!-- JavaScript files-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/popper.js/umd/popper.min.js"> </script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
+<script src="js/front.js"></script>
+
+</body>
+</html>

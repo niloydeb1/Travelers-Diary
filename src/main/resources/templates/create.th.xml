@@ -1,0 +1,14 @@
+<thlogic>
+    <attr sel="#titleHome"
+          th:href="@{'home'}"/>
+    <attr sel="#home"
+          th:href="@{'home'}"/>
+    <attr sel="#blog"
+          th:href="@{'blog'}"/>
+    <attr sel="#create"
+          th:href="@{'create'}"/>
+    <attr sel="#logout"
+          th:href="@{'logout'}"/>
+    <attr sel="#message"
+          th:text="${param.CREATE_MESSAGE}"/>
+</thlogic>
