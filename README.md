@@ -2,7 +2,7 @@
 A blog by travelers. 
 
 ## Project Description:
-Travelling and adventure has always been passion and addiction for many people. Traveler’s Diary works as a community for those people. People can sign-up to the website to create and explore the travelling stories by others and also communicate. It is developed using Spring Boot.
+Travelling and adventure has always been passion and addiction for many people. Traveler’s Diary works as a community for those people. Travellers can sign-up to the website to create and explore the travelling stories by others and also communicate. It is developed using Spring Boot.
 
 ## Tools:
 1. Programming Language: Java
