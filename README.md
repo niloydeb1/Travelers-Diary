@@ -12,7 +12,6 @@ Travelling and adventure has always been passion and addiction for many people. 
 5. Front-End Tools: HTML, CSS
 
 ## Project Features:
-Implemented features: 
 1.	Login and Sign-Up system
 2.	Home page with multiple blog headings.
 3.	Navigation bar to simplify usage.
